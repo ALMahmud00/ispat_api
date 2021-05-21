@@ -8,12 +8,12 @@ using Microsoft.Extensions.Logging;
 namespace ispat.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
         {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+            "Copyright Reserved @ Naimul, Bulbul & Mahmud"
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
@@ -24,16 +24,10 @@ namespace ispat.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public Array Get()
         {
             var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+            return Summaries;
         }
     }
 }
