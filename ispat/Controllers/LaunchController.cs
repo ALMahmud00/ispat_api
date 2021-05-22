@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 namespace ispat.Controllers
 {
     [ApiController]
-    [Route("")]
+    [Route("Copyright")]
     public class LaunchController : ControllerBase
     {
         private static readonly string[] Summaries = new[]

@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ispat.DbContexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,7 +26,16 @@ namespace ispat
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //add swagger services
+            services.AddSwaggerGen();
+
             services.AddControllers();
+
+            services.AddHttpClient();
+            services.AddDbContext<ReadWriteContext>(options =>
+                     options.UseSqlServer(Configuration["Development"]));
+
+            //services.AddTransient<ISoftdrinksService, SoftdrinksService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,6 +45,15 @@ namespace ispat
             {
                 app.UseDeveloperExceptionPage();
             }
+            //configure swagger
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.RoutePrefix = "swaggerui";
+            });
+
+            app.UseHttpsRedirection();
 
             app.UseRouting();
 
