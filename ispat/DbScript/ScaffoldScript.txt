@@ -1,0 +1,2 @@
+﻿
+scaffold-DbContext "" Microsoft.EntityFrameworkCore.SqlServer -OutputDir "Models/" -ContextDir "DbContexts" -Context "ReadWriteContext"  -t -f

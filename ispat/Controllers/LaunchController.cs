@@ -9,16 +9,16 @@ namespace ispat.Controllers
 {
     [ApiController]
     [Route("")]
-    public class WeatherForecastController : ControllerBase
+    public class LaunchController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
         {
             "Copyright Reserved @ Naimul, Bulbul & Mahmud"
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<LaunchController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public LaunchController(ILogger<LaunchController> logger)
         {
             _logger = logger;
         }
