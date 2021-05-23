@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ispat.DbContexts;
+using ispat.IRepository;
+using ispat.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -30,12 +32,13 @@ namespace ispat
             services.AddSwaggerGen();
 
             services.AddControllers();
-
+            services.AddHttpContextAccessor();
             services.AddHttpClient();
-            services.AddDbContext<ReadWriteContext>(options =>
-                     options.UseSqlServer(Configuration["Development"]));
+            
+            services.AddDbContext<ReadWriteContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Development")));
 
-            //services.AddTransient<ISoftdrinksService, SoftdrinksService>();
+            DependencyContainer.RegisterServices(services);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,7 +52,7 @@ namespace ispat
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Ispat API");
                 c.RoutePrefix = "swaggerui";
             });
 

@@ -19,8 +19,8 @@ namespace ispat.Repository
         {
             var data = await Task.FromResult(_context.Credential.FirstOrDefault(x=>x.MobileNumber == obj.MobileNumber && x.Password == obj.Password && x.IsBlock == false));
 
-            if (data == null)
-                return $"Log in as{data.UserName}";
+            if (data != null)
+                return $"Log in as {data.UserName}";
             return $"Invalid Credential!";
         }
     }

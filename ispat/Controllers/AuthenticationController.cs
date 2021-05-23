@@ -21,9 +21,9 @@ namespace ispat.Controllers
             _iRepository = IRepository; 
         }
         
-        [HttpGet]
+        [HttpPost]
         [Route("LogIn")]
-        [SwaggerOperation(Description = "Example { }")]
+        //[SwaggerOperation(Description = "Example { }")]
         public async Task<string> LogIn([FromBody]LogInDTO obj)
         {
          return await _iRepository.LogIn(obj);
