@@ -32,18 +32,24 @@ namespace ispat.Middlewares
                 string message;
                 var exceptiopnType = ex.GetType();
 
-                if(exceptiopnType == typeof(UnauthorizedAccessException))
+                if(exceptiopnType == typeof(Exception))
+                {
+                    httpStatusCode = HttpStatusCode.OK;
+                    message = ex.Message;
+                }
+                else if(exceptiopnType == typeof(UnauthorizedAccessException))
                 {
                     httpStatusCode = HttpStatusCode.Forbidden;
                     message = "You are not authorize.";
-                }else 
+                }else
                 {
-                    message = "Something went wrong.";
+                    message = "Something went wrong!";
                 }
 
                 if (_env.IsDevelopment())
                 {
-                    response = new ApiError((long)httpStatusCode, ex.Message, ex.StackTrace);
+                    response = new ApiError((long)httpStatusCode, message);
+                    //response = new ApiError((long)httpStatusCode, ex.Message, ex.StackTrace);
                 }
                 else
                 {
