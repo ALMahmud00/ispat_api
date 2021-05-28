@@ -28,13 +28,26 @@ namespace ispat.Middlewares
             {
                 ApiError response;
                 HttpStatusCode httpStatusCode = HttpStatusCode.InternalServerError;
+
+                string message;
+                var exceptiopnType = ex.GetType();
+
+                if(exceptiopnType == typeof(UnauthorizedAccessException))
+                {
+                    httpStatusCode = HttpStatusCode.Forbidden;
+                    message = "You are not authorize.";
+                }else 
+                {
+                    message = "Something went wrong.";
+                }
+
                 if (_env.IsDevelopment())
                 {
                     response = new ApiError((long)httpStatusCode, ex.Message, ex.StackTrace);
                 }
                 else
                 {
-                    response = new ApiError((long)httpStatusCode, ex.Message);
+                    response = new ApiError((long)httpStatusCode, message);
                 }
 
                 httpContext.Response.StatusCode = (int)httpStatusCode;
