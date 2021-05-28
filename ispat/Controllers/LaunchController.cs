@@ -9,6 +9,7 @@ namespace ispat.Controllers
 {
     [ApiController]
     [Route("Copyright")]
+    [Route("")]
     public class LaunchController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -26,6 +27,7 @@ namespace ispat.Controllers
         [HttpGet]
         public Array Get()
         {
+            throw new UnauthorizedAccessException();
             var rng = new Random();
             return Summaries;
         }

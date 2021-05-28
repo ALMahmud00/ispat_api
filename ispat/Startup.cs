@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ispat.DbContexts;
 using ispat.IRepository;
+using ispat.Middlewares;
 using ispat.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -44,10 +45,12 @@ namespace ispat
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            app.UseMiddleware<ExceptionMiddleware>();
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
+
             //configure swagger
             app.UseSwagger();
             app.UseSwaggerUI(c =>
