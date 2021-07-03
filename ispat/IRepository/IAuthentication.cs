@@ -8,6 +8,6 @@ namespace ispat.IRepository
 {
     public interface IAuthentication
     {
-        public Task<LogInInformationDTO> LogIn(LogInDTO obj);
+        public Task<string> LogIn(LogInDTO obj);
     }
 }

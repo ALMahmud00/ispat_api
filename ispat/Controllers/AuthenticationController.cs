@@ -23,10 +23,10 @@ namespace ispat.Controllers
         
         [HttpPost]
         [Route("LogIn")]
-        public async Task<IActionResult> LogIn([FromBody]LogInDTO obj)
+        //[SwaggerOperation(Description = "Example { }")]
+        public async Task<string> LogIn([FromBody]LogInDTO obj)
         {
-            return Ok(await _iRepository.LogIn(obj));
+         return await _iRepository.LogIn(obj);
         }
-
     }
 }
