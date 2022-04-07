@@ -14,7 +14,7 @@ namespace ispat.Controllers
     {
         private static readonly string[] Summaries = new[]
         {
-            "Copyright Reserved @ Naimul, Bulbul & Mahmud"
+            "Copyright Reserved"
         };
 
         private readonly ILogger<LaunchController> _logger;
